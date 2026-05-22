@@ -1,95 +1,83 @@
-# SBA 7(a) + 504 Lending Verification Against Census Population Data
+# SBA 7(a) + 504 Census Verification
 
-## Overview
+## Objective
 
-This project investigates the relationship between SBA-backed lending activity and municipal population size by combining:
+This project investigates claims regarding SBA capital distribution patterns by combining:
 
-- SBA 7(a) lending data
-- SBA 504 / CRE lending data
-- U.S. Census population estimates
+- SBA 7(a) loan data
+- SBA 504 CRE loan data
+- U.S. Census city-level population data
 
-The goal is to determine whether smaller municipalities account for meaningful lending activity and job creation after 
-controlling for geographic inconsistencies.
+The analysis tests whether small towns receive disproportionately low lending activity and attempts to separate measurable 
+signals from data artifacts introduced by geographic inconsistencies.
 
 ---
 
 ## Research Question
 
-Do small communities (<10,000 residents) receive significant SBA-supported economic activity?
+Do SBA lending patterns systematically favor large population centers, or are lending distributions consistent with 
+population-adjusted expectations?
+
+---
+
+## Method Summary
+
+1. Import SBA 7(a) and SBA 504 datasets
+2. Aggregate by city/state
+3. Import Census population estimates
+4. Remove state-level entries
+5. Normalize geographic naming
+6. Merge lending and population datasets
+7. Analyze:
+
+- capital distribution
+- jobs created
+- dollars-per-capita
+- merge quality
+- outliers
 
 ---
 
 ## Key Findings
 
-### Municipal merge results
+Merged observations:
 
-| Metric | Value |
-|----------|-------|
-| Municipal observations | 10,994 |
-| Successful Census matches | 7,528 |
-| Match rate | 68.5% |
+7,528 cities
 
----
+Merge success:
 
-### Small-town findings
+≈68.5%
 
-| Metric | Value |
-|----------|-------|
-| Small municipalities | 4,234 |
-| Total loan dollars | $9.84B |
-| Jobs supported | 185,818 |
+Small towns (<10,000 population):
 
-Small municipalities represented approximately 56% of successfully merged observations.
+4,234 cities
 
----
+Small-town lending:
 
-## Workflow
+$9.84B
 
-Raw data
+Large-town lending:
 
-↓
+$65.4B
 
-Population cleaning
+Small towns represented:
 
-↓
-
-Municipality normalization
-
-↓
-
-State abbreviation conversion
-
-↓
-
-Duplicate resolution
-
-↓
-
-Merge construction
-
-↓
-
-Analysis
-
-↓
-
-Export results
+56.2% of merged locations
 
 ---
 
-## Reproducing results
+## Important Caveat
 
-Run scripts in sequence:
+Raw geographic data required extensive normalization.
 
-```powershell
-.\scripts\01_import.ps1
+Many apparent findings changed materially after correcting:
 
-.\scripts\02_clean_population.ps1
+- City/Town suffixes
+- Saint vs St
+- Mount vs Mt
+- duplicate municipalities
+- state-level rows
+- punctuation inconsistencies
 
-.\scripts\03_normalize_locations.ps1
-
-.\scripts\04_merge.ps1
-
-.\scripts\05_analysis.ps1
-
-.\scripts\06_export_results.ps1
+This project demonstrates how data extraction, transformation, and loading (ETL) quality strongly affects downstream 
+conclusions.
