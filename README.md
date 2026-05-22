@@ -89,19 +89,33 @@ See scripts/, charts/, results/, and documentation files.
 
 SBA-CRE-Verification/
 ├── README.md
+
 ├── slides.md
+
 ├── data-cleaning.md
+
 ├── analysis.md
+
 ├── requirements.md
+
 ├── LICENSE
+
 ├── scripts/
+
 │   ├── normalize.ps1
+
 │   ├── merge.ps1
+
 │   └── analyze.ps1
+
 ├── charts/
+
 │   ├── loan_distribution.png
+
 │   ├── merge_success.png
+
 │   └── outliers.png
+
 └── results/
-    ├── merged.csv
-    └── small_town_summary.csv
+ 
+    ├── merged.csv    └── small_town_summary.csv
