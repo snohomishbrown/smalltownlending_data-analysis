@@ -1,123 +1,95 @@
-# SBA CRE Lending Claim Verification
+# SBA 7(a) + 504 Lending Verification Against Census Population Data
 
-## Separating Signal From Noise
+## Overview
 
-Technical investigation into whether small communities receive disproportionate commercial real estate lending through SBA 504 programs.
+This project investigates the relationship between SBA-backed lending activity and municipal population size by combining:
+
+- SBA 7(a) lending data
+- SBA 504 / CRE lending data
+- U.S. Census population estimates
+
+The goal is to determine whether smaller municipalities account for meaningful lending activity and job creation after 
+controlling for geographic inconsistencies.
 
 ---
 
 ## Research Question
 
-Do small communities receive disproportionately large amounts of SBA commercial real estate lending relative to their population?
+Do small communities (<10,000 residents) receive significant SBA-supported economic activity?
 
 ---
 
-## Objectives
+## Key Findings
 
-This project attempts to:
+### Municipal merge results
 
-- Normalize administrative lending data
-- Merge lending activity with Census population data
-- Evaluate lending intensity
-- Investigate outliers
-- Quantify uncertainty
-- Build a repeatable analytical framework
-
----
-
-## Data Sources
-
-### SBA FOIA 504 Dataset
-
-Period:
-
-FY2010–Present
-
-Filtered:
-
-- Commercial real estate collateral
-- Hotels
-- Motels
-- Restaurants
-- Medical
-- Office
-- Childcare
-- Fitness
-- Real estate sectors
-
-Results:
-
-- 33,655 loans
-- $29.99B approvals
-- 359,787 jobs
+| Metric | Value |
+|----------|-------|
+| Municipal observations | 10,994 |
+| Successful Census matches | 7,528 |
+| Match rate | 68.5% |
 
 ---
 
-### Census Population Data
+### Small-town findings
 
-Fields:
+| Metric | Value |
+|----------|-------|
+| Small municipalities | 4,234 |
+| Total loan dollars | $9.84B |
+| Jobs supported | 185,818 |
 
-- City
-- State
-- Historical estimates
-
----
-
-## Findings Summary
-
-Small communities (<10K population):
-
-- 4,234 communities
-- $9.84B loan volume
-- 187,071 jobs
-
-Larger communities:
-
-- $65.4B loan volume
+Small municipalities represented approximately 56% of successfully merged observations.
 
 ---
 
-## Key Caveat
+## Workflow
 
-Current evidence suggests substantial small-town participation, but does not prove systematic favoritism or disproportionate allocation.
+Raw data
+
+↓
+
+Population cleaning
+
+↓
+
+Municipality normalization
+
+↓
+
+State abbreviation conversion
+
+↓
+
+Duplicate resolution
+
+↓
+
+Merge construction
+
+↓
+
+Analysis
+
+↓
+
+Export results
 
 ---
 
-## Repository Layout
+## Reproducing results
 
-See scripts/, charts/, results/, and documentation files.
+Run scripts in sequence:
 
-SBA-CRE-Verification/
+```powershell
+.\scripts\01_import.ps1
 
-├── README.md
+.\scripts\02_clean_population.ps1
 
-├── slides.md
+.\scripts\03_normalize_locations.ps1
 
-├── data-cleaning.md
+.\scripts\04_merge.ps1
 
-├── analysis.md
+.\scripts\05_analysis.ps1
 
-├── requirements.md
-
-├── LICENSE
-
-├── scripts/
-
-│   ├── normalize.ps1
-
-│   ├── merge.ps1
-
-│   └── analyze.ps1
-
-├── charts/
-
-│   ├── loan_distribution.png
-
-│   ├── merge_success.png
-
-│   └── outliers.png
-
-└── results/
- 
-    ├── merged.csv
-    └── small_town_summary.csv
+.\scripts\06_export_results.ps1
