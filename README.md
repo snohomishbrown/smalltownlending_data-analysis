@@ -1,25 +1,107 @@
-# smalltownlending_data-analysis
-In this project, I investigate whether small communities receive disproportionate SBA Commercial Real Estate (CRE) lending. 
-Using SBA 504 loan data, Census population estimates, and geographic normalization techniques to investigate, I also 
-determine how this investigation could scale to support other data driven decision making.
+# SBA CRE Lending Claim Verification
 
-SBA CRE Lending Claim Verification
-Technical Report — Methodology, Findings, Limitations, and Future Applications
+## Separating Signal From Noise
 
-Executive Summary
+Technical investigation into whether small communities receive disproportionate commercial real estate lending through SBA 504 programs.
 
-This investigation examined whether commercial real estate (CRE)-related lending within the SBA 504 program 
-disproportionately benefits small communities.
+---
 
-The initial hypothesis originated from observations suggesting that certain small communities appeared to receive unusually 
-large amounts of CRE financing relative to their population sizes.
+## Research Question
 
-To evaluate this claim, SBA FOIA lending data was integrated with Census population estimates and subjected to multiple 
-stages of normalization and validation.
+Do small communities receive disproportionately large amounts of SBA commercial real estate lending relative to their population?
 
-The analysis found evidence that small communities participate substantially in SBA CRE lending activity and support 
-significant employment outcomes. However, the results do not presently support stronger claims of systematic favoritism or 
-disproportionate allocation.
+---
 
-Several sources of uncertainty remain, including inflation effects, population timing mismatches, geographic 
-inconsistencies, and incomplete city-level matching.
+## Objectives
+
+This project attempts to:
+
+- Normalize administrative lending data
+- Merge lending activity with Census population data
+- Evaluate lending intensity
+- Investigate outliers
+- Quantify uncertainty
+- Build a repeatable analytical framework
+
+---
+
+## Data Sources
+
+### SBA FOIA 504 Dataset
+
+Period:
+
+FY2010–Present
+
+Filtered:
+
+- Commercial real estate collateral
+- Hotels
+- Motels
+- Restaurants
+- Medical
+- Office
+- Childcare
+- Fitness
+- Real estate sectors
+
+Results:
+
+- 33,655 loans
+- $29.99B approvals
+- 359,787 jobs
+
+---
+
+### Census Population Data
+
+Fields:
+
+- City
+- State
+- Historical estimates
+
+---
+
+## Findings Summary
+
+Small communities (<10K population):
+
+- 4,234 communities
+- $9.84B loan volume
+- 187,071 jobs
+
+Larger communities:
+
+- $65.4B loan volume
+
+---
+
+## Key Caveat
+
+Current evidence suggests substantial small-town participation, but does not prove systematic favoritism or disproportionate allocation.
+
+---
+
+## Repository Layout
+
+See scripts/, charts/, results/, and documentation files.
+
+SBA-CRE-Verification/
+├── README.md
+├── slides.md
+├── data-cleaning.md
+├── analysis.md
+├── requirements.md
+├── LICENSE
+├── scripts/
+│   ├── normalize.ps1
+│   ├── merge.ps1
+│   └── analyze.ps1
+├── charts/
+│   ├── loan_distribution.png
+│   ├── merge_success.png
+│   └── outliers.png
+└── results/
+    ├── merged.csv
+    └── small_town_summary.csv
