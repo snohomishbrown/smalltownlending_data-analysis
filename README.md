@@ -88,6 +88,7 @@ Current evidence suggests substantial small-town participation, but does not pro
 See scripts/, charts/, results/, and documentation files.
 
 SBA-CRE-Verification/
+
 ├── README.md
 
 ├── slides.md
@@ -118,4 +119,5 @@ SBA-CRE-Verification/
 
 └── results/
  
-    ├── merged.csv    └── small_town_summary.csv
+    ├── merged.csv
+    └── small_town_summary.csv
